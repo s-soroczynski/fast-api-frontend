@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { ROUTES } from "./constants";
 
+import { Home } from "./domains/Home/Home";
+import { AddPublicToilet } from "./domains/AddPublicToilet/AddPublicToilet";
+import { Login } from "./domains/Login/Login";
+import { Registration } from "./domains/Registration/Registration";
+
+console.log("c1s22o");
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.ADD_PUBLIC_TOILET} element={<AddPublicToilet />} />
+        <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.REGISTRATION} element={<Registration />} />
+      </Routes>
     </div>
   );
 }
