@@ -6,7 +6,6 @@ import { AddPublicToilet } from "./domains/AddPublicToilet/AddPublicToilet";
 import { Login } from "./domains/Login/Login";
 import { Registration } from "./domains/Registration/Registration";
 
-console.log("c1s22o");
 function App() {
   return (
     <div className="App">

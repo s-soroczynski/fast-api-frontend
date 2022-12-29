@@ -5,6 +5,7 @@ import { TextField, Typography } from "@mui/material";
 import { Template } from "../../common/Template/Template";
 import { BASE_URL } from "../../constants";
 import { setItemToLocalStorage } from "../../helpers";
+import { styles } from "./styles";
 
 type InputsType = {
   email: string;
@@ -13,20 +14,7 @@ type InputsType = {
 
 export const Login = () => {
   const { register, handleSubmit } = useForm<InputsType>();
-  const styles = {
-    submit: {
-      mt: "30px",
-      width: 200,
-    },
-    textfield: {
-      mb: "30px",
-      width: "100%",
-    },
-    title: {
-      mb: "60px",
-      textAlign: "center",
-    },
-  };
+
   const onSubmit: SubmitHandler<InputsType> = (data) => {
     const formData = new FormData();
     formData.append("username", data.email);

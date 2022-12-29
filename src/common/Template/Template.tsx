@@ -9,10 +9,8 @@ type TemplateProps = {
 export const Template = (props: TemplateProps) => {
   return (
     <Container maxWidth="md">
-      <>
-        <Header />
-        {props.children}
-      </>
+      <Header />
+      {props.children}
     </Container>
   );
 };
