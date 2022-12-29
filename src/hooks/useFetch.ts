@@ -19,15 +19,12 @@ export const useFetch = <T>(
     const signal = abortController.signal;
     const doFetch = async () => {
       setLoading(true);
-      let options = {};
-      if (withAuth) {
-        options = {
-          ...options,
-          headers: {
-            Authorization: `Bearer ${getItemFromLocalStorage("token")}`,
-          },
-        };
-      }
+      let options = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getItemFromLocalStorage("token")}`,
+        },
+      };
 
       try {
         const res = await fetch(url, options);

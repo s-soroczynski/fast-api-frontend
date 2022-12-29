@@ -15,7 +15,7 @@ export const LeafletMap = memo((props: LeafletMapProps) => {
   return (
     <Box sx={leafletStyles.box}>
       <MapContainer
-        style={{ width: "600px", height: "300px" }}
+        style={{ width: "900px", height: "450px" }}
         center={defaultCenter}
         zoom={14}
         scrollWheelZoom={false}

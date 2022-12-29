@@ -22,12 +22,12 @@ export const PublicToilet = memo(() => {
     if (publicToilet?.user_id) {
       fetchHelper({ url: `${BASE_URL}/users/${publicToilet.user_id}` }).then(
         (userData: UserDetailsType) => {
-          console.log(userData, "res");
           setUser(userData);
         }
       );
     }
   }, [publicToilet]);
+
   console.log(publicToilet);
   return !publicToiletLoading && publicToilet ? (
     <Template>
@@ -43,11 +43,10 @@ export const PublicToilet = memo(() => {
             </>
           )}
         </Box>
+        <Typography variant="h6">Opis: {publicToilet.description}</Typography>
         <LeafletMap>
-          <Marker position={[publicToilet.lng, publicToilet.lat]}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
+          <Marker position={[publicToilet.lat, publicToilet.lng]}>
+            <Popup>some description</Popup>
           </Marker>
         </LeafletMap>
       </>

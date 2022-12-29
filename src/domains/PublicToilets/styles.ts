@@ -4,5 +4,6 @@ export const publicToiletStyles = {
     justifyContent: "space-between",
     alignItems: "center",
     mt: "30px",
+    mb: "15px",
   },
 };

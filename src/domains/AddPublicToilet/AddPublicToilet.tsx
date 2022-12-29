@@ -13,8 +13,10 @@ import { styles } from "./styles";
 
 type InputsType = {
   name: string;
+  description: string;
   lat: number;
   lng: number;
+  rate: number;
 };
 
 export const AddPublicToilet = () => {
@@ -23,7 +25,12 @@ export const AddPublicToilet = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<InputsType>();
+  } = useForm<InputsType>({
+    defaultValues: {
+      rate: 1,
+    },
+  });
+  register("rate", { required: true });
   register("lat", { required: true });
   register("lng", { required: true });
  
@@ -32,6 +39,7 @@ export const AddPublicToilet = () => {
       method: "POST",
       mode: "cors",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${getItemFromLocalStorage("token")}`,
       },
       body: JSON.stringify(data),
@@ -58,6 +66,14 @@ export const AddPublicToilet = () => {
           label="Nazwa"
           variant="outlined"
           {...register("name", { required: true })}
+        />
+        <TextField
+          sx={styles.name}
+          label="Opis"
+          placeholder="Podaj,opis który może pomóc w znalezieniu toalety"
+          type="textarea"
+          variant="outlined"
+          {...register("description", { required: true })}
         />
         <GoogleMapReactApi handleOnClickMap={handleClickOnMap} />
         <LoadingButton sx={styles.submit} variant="contained" type="submit">
