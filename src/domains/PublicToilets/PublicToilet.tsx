@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Typography, Box, Rating } from "@mui/material";
+import { Marker, Popup } from "react-leaflet";
 
 import { Template } from "../../common/Template/Template";
 import { BASE_URL } from "../../constants";
@@ -8,7 +9,8 @@ import { useFetch } from "../../hooks/useFetch";
 import { PublicToiletType } from "../../types/PublicToilet";
 import { UserDetailsType } from "../../types/User";
 import { fetchHelper } from "../../helpers";
-import { flexbox } from "@mui/system";
+import { publicToiletStyles } from "./styles";
+import { LeafletMap } from "../../common/Map/LeafletMap";
 
 export const PublicToilet = memo(() => {
   let { id } = useParams();
@@ -26,21 +28,12 @@ export const PublicToilet = memo(() => {
       );
     }
   }, [publicToilet]);
-
-  const styles = {
-    boxUpper: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      mt: "30px",
-    },
-  };
-
+  console.log(publicToilet);
   return !publicToiletLoading && publicToilet ? (
     <Template>
       <>
         <Typography variant="h2">PublicToilet: {publicToilet.name}</Typography>
-        <Box sx={styles.boxUpper}>
+        <Box sx={publicToiletStyles.boxUpper}>
           {user && (
             <>
               <Typography variant="h5">
@@ -50,6 +43,13 @@ export const PublicToilet = memo(() => {
             </>
           )}
         </Box>
+        <LeafletMap>
+          <Marker position={[publicToilet.lng, publicToilet.lat]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </LeafletMap>
       </>
     </Template>
   ) : null;
