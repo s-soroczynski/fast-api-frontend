@@ -6,6 +6,7 @@ import { Template } from "../../common/Template/Template";
 import { useFetch } from "../../hooks/useFetch";
 import { BASE_URL, ROUTES } from "../../constants";
 import { PublicToiletType } from "../../types/PublicToilet";
+import { publicToiletsStyles } from "./styles";
 
 export const PublicToilets = () => {
   const navigation = useNavigate();
@@ -18,27 +19,6 @@ export const PublicToilets = () => {
     `${BASE_URL}/public-toilets`
   );
 
-  const styles = {
-    box: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      mb: "20px",
-      padding: "20px",
-      borderRadius: "10px",
-      border: "1px solid #ddd",
-      cursor: "pointer",
-      transition: "background-color 150ms ease-out 100ms",
-      "&:hover": {
-        backgroundColor: "#eee",
-      },
-    },
-    rate: {
-      mt: "-20px",
-      mr: "-10px",
-    },
-  };
-
   return (
     <Template>
       <Grid item xs={12} md={6}>
@@ -46,13 +26,13 @@ export const PublicToilets = () => {
           response?.map((publicToilet) => {
             return (
               <Box
-                sx={styles.box}
+                sx={publicToiletsStyles.box}
                 key={publicToilet.id}
                 onClick={() => goToPublicToilet(publicToilet.id)}
               >
                 <Typography>{publicToilet.name}</Typography>
                 <Rating
-                  sx={styles.rate}
+                  sx={publicToiletsStyles.rate}
                   value={publicToilet.rate}
                   size="small"
                 />

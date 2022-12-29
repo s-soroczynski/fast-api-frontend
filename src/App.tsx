@@ -6,7 +6,7 @@ import { AddPublicToilet } from "./domains/AddPublicToilet/AddPublicToilet";
 import { Login } from "./domains/Login/Login";
 import { Registration } from "./domains/Registration/Registration";
 import { PublicToilets } from "./domains/PublicToilets/PublicToilets";
-//TODO czy napewno chcemy trzymac singular komponent w plural folderze??
+//TODO should we contain 2 different components inside one folder? plural/singular name conflict?
 import { PublicToilet } from "./domains/PublicToilets/PublicToilet";
 
 function App() {
