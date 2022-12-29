@@ -3,7 +3,10 @@ import { LoadingButton } from "@mui/lab";
 import { TextField, Typography } from "@mui/material";
 
 import { Template } from "../../common/Template/Template";
-import { Map, MarkerType } from "../../common/Map/Map";
+import {
+  GoogleMapReactApi,
+  MarkerType,
+} from "../../common/Map/GoogleMapReactApi";
 import { BASE_URL } from "../../constants";
 import { getItemFromLocalStorage } from "../../helpers";
 import { styles } from "./styles";
@@ -56,7 +59,7 @@ export const AddPublicToilet = () => {
           variant="outlined"
           {...register("name", { required: true })}
         />
-        <Map handleOnClickMap={handleClickOnMap} />
+        <GoogleMapReactApi handleOnClickMap={handleClickOnMap} />
         <LoadingButton sx={styles.submit} variant="contained" type="submit">
           zapisz
         </LoadingButton>

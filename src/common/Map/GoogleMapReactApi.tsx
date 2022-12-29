@@ -2,10 +2,6 @@ import { useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 import { GOOGLE_API_KEY } from "../../constants";
-import {
-  SuperClusterAlgorithm,
-  MarkerClusterer,
-} from "@googlemaps/markerclusterer";
 
 export type MarkerType = {
   lat: number;
@@ -19,14 +15,12 @@ const defaultCenter: MarkerType = {
 
 type MapProps = {
   handleOnClickMap: (e: MarkerType) => void;
-  publicToiletsMarkers?: MarkerType[];
 };
 
-export const Map = ({ handleOnClickMap, publicToiletsMarkers }: MapProps) => {
-  const [zoom, setZoom] = useState(12);
+export const GoogleMapReactApi = ({ handleOnClickMap }: MapProps) => {
   const [marker, setMarker] = useState<MarkerType>();
   const [center, setCenter] = useState(defaultCenter);
-  const [mapContainer, setMapContainer] = useState<HTMLDivElement | null>(null);
+  const [mapContainer, setMapContainer] = useState(null);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_API_KEY,
   });
@@ -37,44 +31,25 @@ export const Map = ({ handleOnClickMap, publicToiletsMarkers }: MapProps) => {
       setMarker(marker);
       setCenter(marker);
       handleOnClickMap(marker);
-      setZoom(14);
+      if (mapContainer) {
+        //@ts-ignore
+        mapContainer.setZoom(14);
+      }
     }
   };
-  const tree = [
-    { lat: 49.8132793, lng: 19.3885883 },
-    { lat: 49.614939, lng: 19.6628451 },
-    { lat: 49.7598516, lng: 19.4519336 },
-  ];
 
-  const addMarkers = (map: google.maps.Map) => {
-    const markers = tree.map(({ lat, lng }) => {
-      const marker = new google.maps.Marker({ position: { lat, lng } });
-      return marker;
-    });
-
-    new MarkerClusterer({
-      markers,
-      map,
-      algorithm: new SuperClusterAlgorithm({ radius: 200 }),
-    });
-  };
-
-  const onMapLoad = (map: google.maps.Map) => {
-    if (publicToiletsMarkers) {
-      addMarkers(map);
-    }
+  const onLoadMap = (e: google.maps.Map) => {
     //@ts-ignore
-    console.log(map.getZoom(), "zoomm");
+    setMapContainer(e);
   };
 
   return isLoaded ? (
     <GoogleMap
-      zoom={zoom}
+      zoom={12}
       center={center}
       mapContainerStyle={{ width: "100%", height: "500px" }}
       onClick={handleMap}
-      onZoomChanged={() => {}}
-      onLoad={onMapLoad}
+      onLoad={onLoadMap}
     >
       {marker ? <Marker position={marker} /> : null}
     </GoogleMap>
