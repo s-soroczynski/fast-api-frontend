@@ -6,6 +6,7 @@ import { Template } from "../../common/Template/Template";
 import { Map, MarkerType } from "../../common/Map/Map";
 import { BASE_URL } from "../../constants";
 import { getItemFromLocalStorage } from "../../helpers";
+import { styles } from "./styles";
 
 type InputsType = {
   name: string;
@@ -22,20 +23,7 @@ export const AddPublicToilet = () => {
   } = useForm<InputsType>();
   register("lat", { required: true });
   register("lng", { required: true });
-  const styles = {
-    submit: {
-      mt: "30px",
-      width: 200,
-    },
-    name: {
-      mb: "30px",
-      width: "100%",
-    },
-    title: {
-      mb: "60px",
-      textAlign: "center",
-    },
-  };
+ 
   const onSubmit: SubmitHandler<InputsType> = (data) => {
     fetch(`${BASE_URL}/public-toilets`, {
       method: "POST",

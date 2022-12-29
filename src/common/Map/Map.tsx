@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-// import { MarkerClusterer } from "@react-google-maps/api";
 
 import { GOOGLE_API_KEY } from "../../constants";
 import {
@@ -60,14 +59,13 @@ export const Map = ({ handleOnClickMap, publicToiletsMarkers }: MapProps) => {
   };
 
   const onMapLoad = (map: google.maps.Map) => {
-    console.log(publicToiletsMarkers, "publicToiletsMarkers");
     if (publicToiletsMarkers) {
       addMarkers(map);
     }
     //@ts-ignore
     console.log(map.getZoom(), "zoomm");
   };
-  console.log(zoom, "zoom");
+
   return isLoaded ? (
     <GoogleMap
       zoom={zoom}

@@ -5,6 +5,7 @@ import { TextField, Typography } from "@mui/material";
 import { Template } from "../../common/Template/Template";
 import { BASE_URL, ROUTES } from "../../constants";
 import { useNavigate } from "react-router-dom";
+import { styles } from "./styles";
 
 type InputsType = {
   email: string;
@@ -14,20 +15,7 @@ type InputsType = {
 export const Registration = () => {
   const navigation = useNavigate();
   const { register, handleSubmit } = useForm<InputsType>();
-  const styles = {
-    submit: {
-      mt: "30px",
-      width: 200,
-    },
-    textfield: {
-      mb: "30px",
-      width: "100%",
-    },
-    title: {
-      mb: "60px",
-      textAlign: "center",
-    },
-  };
+
   const onSubmit: SubmitHandler<InputsType> = (data) => {
     // TODO obsłuzyć jak użytkownik już istnieje + errory
     fetch(`${BASE_URL}/users`, {
