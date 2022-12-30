@@ -6,6 +6,6 @@ export const ROUTES = {
   ADD_PUBLIC_TOILET: "/add-public-toilet",
 };
 
-export const GOOGLE_API_KEY = "AIzaSyAYMw9oZ8lkb_FZBwQJvEBIfjWMLa7Xiks";
-export const GOOGLE_API_PLACES_KEY = "AIzaSyDDvAUbjI_Gghn0JutncRcJgfITLHGBhjo";
+export const GOOGLE_API_KEY = "";
+export const GOOGLE_API_PLACES_KEY = "";
 export const BASE_URL = "http://127.0.0.1:8000";
