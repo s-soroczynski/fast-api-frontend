@@ -3,15 +3,20 @@ import { LoadingButton } from "@mui/lab";
 import { TextField, Typography } from "@mui/material";
 
 import { Template } from "../../common/Template/Template";
-import { Map, MarkerType } from "../../common/Map/Map";
+import {
+  GoogleMapReactApi,
+  MarkerType,
+} from "../../common/Map/GoogleMapReactApi";
 import { BASE_URL } from "../../constants";
 import { getItemFromLocalStorage } from "../../helpers";
 import { styles } from "./styles";
 
 type InputsType = {
   name: string;
+  description: string;
   lat: number;
   lng: number;
+  rate: number;
 };
 
 export const AddPublicToilet = () => {
@@ -20,7 +25,12 @@ export const AddPublicToilet = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<InputsType>();
+  } = useForm<InputsType>({
+    defaultValues: {
+      rate: 1,
+    },
+  });
+  register("rate", { required: true });
   register("lat", { required: true });
   register("lng", { required: true });
  
@@ -29,6 +39,7 @@ export const AddPublicToilet = () => {
       method: "POST",
       mode: "cors",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${getItemFromLocalStorage("token")}`,
       },
       body: JSON.stringify(data),
@@ -56,7 +67,15 @@ export const AddPublicToilet = () => {
           variant="outlined"
           {...register("name", { required: true })}
         />
-        <Map handleOnClickMap={handleClickOnMap} />
+        <TextField
+          sx={styles.name}
+          label="Opis"
+          placeholder="Podaj,opis który może pomóc w znalezieniu toalety"
+          type="textarea"
+          variant="outlined"
+          {...register("description", { required: true })}
+        />
+        <GoogleMapReactApi handleOnClickMap={handleClickOnMap} />
         <LoadingButton sx={styles.submit} variant="contained" type="submit">
           zapisz
         </LoadingButton>

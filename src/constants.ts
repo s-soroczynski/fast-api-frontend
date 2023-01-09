@@ -3,6 +3,7 @@ export const ROUTES = {
   LOGIN: "/login",
   REGISTRATION: "/registration",
   PUBLIC_TOILETS: "/public-toilets",
+  PUBLIC_TOILET: "/public-toilets/:id",
   ADD_PUBLIC_TOILET: "/add-public-toilet",
 };
 
